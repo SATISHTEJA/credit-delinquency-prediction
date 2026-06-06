@@ -1,0 +1,42 @@
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+from pydantic import BaseModel
+import joblib
+import numpy as np
+
+app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+model = joblib.load("../model/credit_model.pkl")
+
+class PredictionInput(BaseModel):
+    features: list[float]
+
+@app.get("/")
+def home():
+    return {
+        "message": "Credit Delinquency Prediction API Running"
+    }
+
+@app.post("/predict")
+def predict(data: PredictionInput):
+
+    prediction = model.predict(
+        np.array(data.features).reshape(1, -1)
+    )
+
+    probability = model.predict_proba(
+        np.array(data.features).reshape(1, -1)
+    )
+
+    return {
+        "prediction": int(prediction[0]),
+        "risk_probability": float(probability[0][1])
+    }
