@@ -3,6 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 import joblib
 import numpy as np
+import os
 
 app = FastAPI()
 
@@ -14,7 +15,10 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-model = joblib.load("../model/credit_model.pkl")
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+MODEL_PATH = os.path.join(BASE_DIR, "model", "credit_model.pkl")
+
+model = joblib.load(MODEL_PATH)
 
 class PredictionInput(BaseModel):
     features: list[float]
