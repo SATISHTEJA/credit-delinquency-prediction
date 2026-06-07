@@ -3,6 +3,7 @@ import axios from "axios";
 import "./App.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Footer from "./Components/Footer";
 
 function App() {
     const [features, setFeatures] = useState(Array(24).fill(""));
@@ -221,6 +222,7 @@ function App() {
                 autoClose={3000}
                 theme="dark"
             />
+            <Footer />
         </div>
     );
 }
