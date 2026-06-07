@@ -22,7 +22,7 @@ function App() {
                 return;
             }
             const response = await axios.post(
-                "http://127.0.0.1:8000/predict",
+                "https://credit-delinquency-prediction.onrender.com/predict",
                 {
                     features: features.map(Number),
                 }
