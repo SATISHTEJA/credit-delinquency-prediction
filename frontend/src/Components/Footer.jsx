@@ -1,5 +1,5 @@
 import "./Footer.css";
-import { FaGithub, FaLinkedin, FaGlobe, FaXTwitter, FaEnvelope } from "react-icons/fa6";
+import { FaGithub, FaLinkedin, FaGlobe, FaTwitter, FaEnvelope } from "react-icons/fa";
 
 function Footer() {
   return (
@@ -41,7 +41,7 @@ function Footer() {
             rel="noreferrer"
             aria-label="Twitter"
           >
-            <FaXTwitter />
+            <FaTwitter />
           </a>
         </div>
       </div>
